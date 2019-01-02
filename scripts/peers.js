@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
   , lib = require('../lib/explorer')
   , db = require('../lib/database')
   , settings = require('../lib/settings')
-  , request = require('request');
+  , request = require('request')
   , cmp = require('semver-compare');
 
 var COUNT = 5000; //number of blocks to index
@@ -26,13 +26,13 @@ mongoose.connect(dbString, function(err) {
   } else {
     request({uri: 'http://127.0.0.1:' + settings.port + '/api/getpeerinfo', json: true}, function (error, response, body) {
       var livepeers = [];
-        lib.syncLoop(body.length, function (loop) {
+      lib.syncLoop(body.length, function (loop) {
         var i = loop.iteration();
         var address = body[i].addr.split(':')[0];
         var version = body[i].subver.replace('/', '').replace('/', '');
         var semver = version.split(":")[1];
         livepeers[i] = address;
-        db.find_peers(address, function(peer) {
+        db.find_peer(address, function(peer) {
           if (peer) {
               console.log('Live version is: ', semver); //remove this if you'd like
               for(i=0; i<peer.length; i++){
@@ -86,3 +86,6 @@ mongoose.connect(dbString, function(err) {
 		      exit();
         });
       });
+    });
+  };
+});
