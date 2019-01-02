@@ -29,7 +29,6 @@ mongoose.connect(dbString, function(err) {
         var i = loop.iteration();
         var address = body[i].addr.split(':')[0];
         livepeers[i] = address;
-        console.log('checking for ', address);
         db.find_peer(address, function(peer) {
           if (peer) {
             // peer already exists
@@ -49,16 +48,17 @@ mongoose.connect(dbString, function(err) {
         });
       },function(){
         db.get_peers(function(peers){
-          lib.syncLoop(peers.length, function(loop){
-            var i = loop.iteration();
-            if(!livepeers.includes(peers[i].address)){
-              console.log("Address doesnt exist: ", peers[i].address);
-              db.delete_peer(peers[i].address);
-			}
-            loop.next();
-          });
+			for( var i = 0; i < peers.length; i++){
+				if(!livepeers.includes(peers[i].address)){
+				  console.log("Address doesnt exist: ", peers[i].address);
+				  db.delete_peer(peers[i].address);
+				}else{
+					console.log("Address exists: ", peers[i].address);
+				}
+            }
+		  console.log('done');
+		  exit();
         });
-        exit();
       });
     });
   };
