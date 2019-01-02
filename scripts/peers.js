@@ -63,7 +63,7 @@ mongoose.connect(dbString, function(err) {
               }
               loop.next();
           } else {
-            request({uri: 'http://api.ipstack.com/' + address + '?access_key=' + settings.iplookup.apikey, json: true}, function (error, response, geo) {
+            request({uri: 'http://api.ipstack.com/' + address + '?access_key=' + settings.peers.ipstack_api_key, json: true}, function (error, response, geo) {
               db.create_peer({
                 address: address,
                 protocol: body[i].version,
