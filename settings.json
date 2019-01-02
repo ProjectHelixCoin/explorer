@@ -1,0 +1,179 @@
+/*
+  This file must be valid JSON. But comments are allowed
+
+  Please edit settings.json, not settings.json.template
+*/
+{
+  // name your instance!
+  "title": "Helix Explorer",
+
+  "address": "",
+
+  // coin name
+  "coin": "Helix",
+
+  // coin symbol
+  "symbol": "HLIX",
+
+  // logo
+  "logo": "/images/logo.png",
+
+  // favicon
+  "favicon": "public/favicon.ico",
+
+  // Uses bootswatch themes (http://bootswatch.com/)
+  // Valid options:
+  //     Cerulean, Cosmo, Cyborg, Darkly, Flatly, Journal, Lumen, Paper,
+  //     Readable, Sandstone, Simplex, Slate, Spacelab, Superhero, United, Yeti
+  // theme (see /public/themes for available themes)
+  "theme": "Simplex",
+
+  // port to listen for requests on.
+  "port" : 3001,
+
+  // database settings (MongoDB)
+  "dbsettings": {
+    "user": "",
+    "password": "",
+    "database": "explorerdb",
+    "address": "localhost",
+    "port": 27017
+  },
+
+  //update script settings
+  "update_timeout": 10,
+  "check_timeout": 250,
+
+  // wallet settings
+  "wallet": {
+    "host": "127.0.0.1",
+    "port": 19332,
+    "user": "",
+    "pass": ""
+  },
+
+  // confirmations
+  "confirmations": 50,
+
+  // language settings
+  "locale": "locale/en.json",
+
+  // menu settings
+  "display": {
+    "api": true,
+    "markets": false,
+    "richlist": true,
+    "twitter": true,
+    "facebook": true,
+    "googleplus": true,
+    "bitcointalk": true,
+    "website": true,
+    "slack": false,
+    "github": true,
+    "discord": true,
+    "search": true,
+    "movement": true,
+    "network": true
+  },
+
+  // index page (valid options for difficulty are POW, POS or Hybrid)
+  "index": {
+    "show_hashrate": true,
+    "difficulty": "POS",
+    "last_txs": 100
+  },
+
+  // ensure links on API page are valid
+  "api": {
+    "blockindex": 100,
+    "blockhash": "0000000470a0e99ee8fa19d07d74c9c78d26ccd99f1de1616aa89157ebbd5f04",
+    "txhash": "2f5468dbf5803846b18fe2f90f21663edf4694e4a87091955883fe3e45b86bf2",
+    "address": "H9PJ3WKQWmuSSD3ix1haxbMt6Gd4iWmRJJ"
+  },
+
+  // market settings
+  //supported markets: bittrex, poloniex, graviex ,yobit, empoex, bleutrade, cryptopia, ccex, coinexchange
+  //default market is loaded by default and determines last price in header
+  "markets": {
+    "coin": "HLIX",
+    "exchange": "BTC",
+    "enabled": ["graviex"],
+    "cryptopia_id": "2186",
+    "ccex_key" : "Get-Your-Own-Key",
+    "coinexchange_id": "18",
+    "default": "graviex"
+  },
+
+  // richlist/top100 settings
+  "richlist": {
+    "distribution": true,
+    "received": true,
+    "balance": true
+  },
+
+  // movement page settings
+  // min amount: show transactions greater than this value
+  // low flag: greater than this value flagged yellow
+  // high flag: greater than this value flagged red
+  "movement": {
+    "min_amount": 15,
+    "low_flag": 99,
+    "high_flag": 4999
+  },
+
+  // Peers page settings
+  // ipstack_api_key: ipstack.com Geo IP. This is the replacement of http://freegeoip.net You need an API Key for the Requests 
+  "peers": {
+    "ipstack_api_key": "c8768475cbf2dcd819c004291283ce4d" 
+  },
+
+  // twitter, facebook, googleplus, bitcointalk, github, slack, website
+  "twitter": "Thehelixproject",
+  "facebook": "Projecthelix",
+  "googleplus": "helix_coin",
+  "bitcointalk": "4956675",
+  "github": "projecthelixcoin/helix",
+  "discord": "dVgcEka",
+  "slack": "yourfullslackinviteurl",
+  "website": "https://helix-crypto.com",
+
+  //genesis
+  "genesis_tx": "ac7692156d9e2d077416b0823d0f5c4d9eb73c04d13400552661dfe93be4fb06",
+  "genesis_block": "6103a794040cd5c2a2dce252d49dc01b2e42358cb44bbd3089b040ea8437b25e",
+
+  //heavy (enable/disable additional heavy features)
+  "heavy": false,
+
+  //amount of txs to index per address (stores latest n txs)
+  "txcount": 100,
+
+  //show total sent & received on address page (set false if PoS)
+  "show_sent_received": true,
+
+  // how to calculate current coin supply
+  // COINBASE : total sent from coinbase (PoW)
+  // GETINFO : retreive from getinfo api call (PoS)
+  // HEAVY: retreive from heavys getsupply api call
+  // BALANCES : total of all address balances
+  // TXOUTSET : retreive from gettxoutsetinfo api call
+  "supply": "TXOUTSET",
+
+  // how to acquire network hashrate
+  // getnetworkhashps: uses getnetworkhashps api call, returns in GH/s
+  // netmhashps: uses getmininginfo.netmhashpsm returns in MH/s
+  "nethash": "getnetworkhashps",
+
+  // nethash unitd: sets nethash API return units
+  // valid options: "P" (PH/s), "T" (TH/s), "G" (GH/s), "M" (MH/s), "K" (KH/s)
+  "nethash_units": "G",
+
+  // Address labels
+  // example : "CGTta3M4t3yXu8uRgkKvaWd2d8DQvDPnpL": {"label": "This is a burn address", "type":"danger", "url":"http://example.com"}
+  // label (required) = test to display
+  // type (optional) = class of label, valid types: default, primary, warning, danger, success
+  // url (optional) = url to link to for more information
+  "labels": {
+  //  "CLkWg5YSLod772uLzsFRxHgHiWVGAJSezm": {"label": "Donation Address", "type":"primary", "url":"http://example.com"},
+  //  "CaxX1HVWzbQ516w61XbtHR63vNmp2mvLMZ": {"label": "Max Lee War Chest"}
+  }
+}
