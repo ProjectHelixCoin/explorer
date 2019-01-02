@@ -51,9 +51,10 @@ mongoose.connect(dbString, function(err) {
         db.get_peers(function(peers){
           lib.syncLoop(peers.length, function(loop){
             var i = loop.iteration();
-            if(!livepeers.includes(peers[i].address)){
+			if(!livepeers.includes(peers[i].address)){
+              console.log("Address doesnt exist: ", peers[i].address);
               db.delete_peer(peers[i].address);
-            }
+			}
             loop.next();
           });
         });
