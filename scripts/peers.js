@@ -29,7 +29,7 @@ mongoose.connect(dbString, function(err) {
         var i = loop.iteration();
         var address = body[i].addr.split(':')[0];
         livepeers[i] = address;
-		db.delete_peer(address);
+	db.purge_peers();
         db.find_peer(address, function(peer) {
           if (peer) {
             // peer already exists
