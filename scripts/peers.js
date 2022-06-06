@@ -34,7 +34,7 @@ mongoose.connect(dbString, function(err) {
         livepeers[i] = address;
         db.find_peer(address, function(peer) {
           if (peer) {
-              console.log('Live version is: ', semver); //remove this if you'd like
+              //console.log('Live version is: ', semver); //remove this if you'd like
               for(i=0; i<peer.length; i++){
                 // cmp(a,b)
                 // result 1 = a is greater than b
@@ -53,16 +53,17 @@ mongoose.connect(dbString, function(err) {
                       loop.next();
                     });
                   });
-                  console.log('Delete the db version:', peer[i].version.split(":")[1]); //remove
+                  //console.log('Delete the db version:', peer[i].version.split(":")[1]); //remove
                 } else if(cmp(peer[i].version.split(":")[1], semver) == 0){
                     //console.log('Do nothing, they\'re the same');
                 } else {
                   //db.delete_peer({_id:peer[i]._id}); //not sure how this should be handled
-                  console.log('This should never occur, Live Version:', semver, " Is less than:", peer[i].version.split(":")[1]); //remove
+                  //console.log('This should never occur, Live Version:', semver, " Is less than:", peer[i].version.split(":")[1]); //remove
                 }
               }
+              loop.next();
           } else {
-            request({uri: 'http://api.ipstack.com/' + address + '?access_key=' + settings.iplookup.apikey, json: true}, function (error, response, geo) {
+            request({uri: 'http://api.ipstack.com/' + address + '?access_key=' + settings.peers.ipstack_api_key, json: true}, function (error, response, geo) {
               db.create_peer({
                 address: address,
                 protocol: body[i].version,
@@ -82,7 +83,7 @@ mongoose.connect(dbString, function(err) {
               db.delete_peer({address:peers[i].address});
             }
           }
-		      console.log('done');
+		      //console.log('done');
 		      exit();
         });
       });
